@@ -20,3 +20,69 @@ Plants API থেকে সব plant data **fetch** করে প্রতিট
 
 <br>
 
+
+
+### 04. Loading Spinner ফাংশনালি দেখানো
+
+#### Way - 01
+
+```
+function manageSpinner(status) {
+    if (status == true) {
+        document.getElementById("loading-spinner").classList.remove("hidden")
+        document.getElementById("treesContainer").classList.add("hidden")
+    }
+    else {
+        document.getElementById("loading-spinner").classList.add("hidden")
+        document.getElementById("treesContainer").classList.remove("hidden")
+    }
+}
+```
+
+#### Way - 02
+
+```
+
+function loadTrees(){
+    ফাংশনের একদম শুরুতে-
+    document.getElementById("loading-spinner").classList.remove("hidden")
+    document.getElementById("treesContainer").classList.add("hidden")
+}
+
+এবং
+
+const displayTrees = (trees) =>{
+    ফাংশনের একদম শেষে - 
+    document.getElementById("loading-spinner").classList.add("hidden")
+    document.getElementById("treesContainer").classList.remove("hidden")
+}
+
+```
+
+
+#### Way - 03
+
+```
+function showSpinner(){
+    document.getElementById("loading-spinner").classList.remove("hidden")
+    document.getElementById("treesContainer").classList.add("hidden")
+}
+
+
+function hideSpinner(){
+    document.getElementById("loading-spinner").classList.add("hidden")
+    document.getElementById("treesContainer").classList.remove("hidden")
+}
+
+// এরপর উপযুক্ত জায়গায় কল করে দিতে হবে।
+
+```
+
+<br>
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+## 🌱 Green Earth - `Working Flow`
+
+
+### 1. Category Button দেখানো
+
+API থেকে category data **fetch** করে প্রতিটি category অনুযায়ী dynamic button তৈরি করে UI-তে দেখানো হয়েছে।
+
+
+<br>
+
+### 2. Plant Card তৈরি করা
+
+DaisyUI ব্যবহার করে প্রতিটি plant-এর জন্য dynamic card তৈরি করা হয়েছে। Card-এর description দুই লাইনের মধ্যে সীমাবদ্ধ রাখতে `line-clamp-2` class ব্যবহার করা হয়েছে। যেখানে `truncate` class ব্যবহার করলে description শুধু এক লাইনে সীমাবদ্ধ থাকে।
+
+<br>
+
+### 3. সব Plant Dynamicভাবে দেখানো
+
+Plants API থেকে সব plant data **fetch** করে প্রতিটি plant-এর তথ্য অনুযায়ী dynamic card তৈরি করে UI-তে দেখানো হয়েছে।
+
+<br>
+

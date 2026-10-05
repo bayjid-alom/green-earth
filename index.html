@@ -9,15 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <link rel="stylesheet" href="./styles/styles.css">
+
     <title>Green Earth</title>
 
-    <style>
-        .primary-btn {
-            background-color: #4ade80;
-            color: white;
-            border: none;
-        }
-    </style>
 
 </head>
 
@@ -34,7 +29,7 @@
                 <h2 class="font-bold text-2xl text-left m-2">Categories</h2>
 
                 <div class="space-y-3">
-                    <button class="btn btn-success w-full">All Trees</button>
+                    <button id="all-trees" class="btn btn-primary w-full">All Trees</button>
 
                     <!-- Categories container (left side)-->
                     <div id="categoriesContainer" class="space-y-3">
@@ -65,8 +60,8 @@
 
 
             <!-- cart (right side) -->
-            <div class="bg-yellow-200 col-span-3 rounded-md">
-                Cart here
+            <div class="bg-white col-span-3 rounded-md shadow-sm">
+                <h2 class="my-10">Cart here....</h2>
             </div>
 
         </div>

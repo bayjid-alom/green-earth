@@ -26,9 +26,29 @@ async function loadCategories() {
         // btn.textContent = category.category_name;
 
         btn.innerText = category.category_name;
+
+        btn.onclick = () => selectCategory(category.id, btn);
         categoriesContainer.appendChild(btn);
     });
 }
+
+
+async function selectCategory(categoryId, btn) {
+    console.log(categoryId, btn);
+    manageSpinner(false)
+    const allButtons = document.querySelectorAll("#categoriesContainer button, #all-trees");
+
+    allButtons.forEach(btn => {
+        btn.classList.remove("btn-primary")
+        btn.classList.add("btn-outline")
+    })
+
+    btn.classList.add("btn-primary")
+    btn.classList.remove("btn-outline")
+
+}
+
+
 
 
 
@@ -54,7 +74,7 @@ const displayTrees = trees => {
         card.innerHTML = `
             <figure>
                 <img
-                    class="h-48 w-full object-cover"
+                    class="h-40 w-full object-cover"
                     src="${tree.image}"
                     alt="${tree.name}" />
             </figure>
@@ -63,7 +83,7 @@ const displayTrees = trees => {
                 <p class="text-left line-clamp-2">${tree.description}</p>
                 <div class="flex justify-between items-center">
                     <div class="badge bg-[#DCFCE7] text-[#15803D]">${tree.category}</div>
-                    <h2 class="font-bold">Tk ${tree.price}</h2>
+                    <h2 class="font-bold">${tree.price} TK</h2>
                 </div>
                 <div class="card-actions justify-end">
                     <button class="btn text-white bg-[#15803D] w-full rounded-full">Add to Cart</button>

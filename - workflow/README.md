@@ -85,4 +85,36 @@ function hideSpinner(){
 
 
 
+### 05. প্রত্যেক বাটনের Trees দেখানো
+
+```
+btn.onclick = () => selectCategory(category.id);
+-
+async function selectCategory(id) {
+    console.log(id);
+}
+```
+
+
+```
+async function selectCategory(categoryId, btn) {
+    console.log(categoryId, btn);
+    // manageSpinner(false)
+    btn.classList.add("btn-primary")
+
+    document.querySelectorAll("")
+
+}
+```
+
+```
+<button id="all-trees" class="btn btn-primary w-full">All Trees</button>
+```
+
+
+
+
+
+
+
 

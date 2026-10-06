@@ -3,6 +3,13 @@ const treesContainer = document.getElementById("treesContainer");
 const categorySpinner = document.getElementById("category-spinner");
 
 const allTreesBtn = document.getElementById("all-trees");
+const treeDetailsModal = document.getElementById("tree_details_modal")
+
+const modalImage = document.getElementById("modal-image")
+const modalCategory = document.getElementById("modal-category")
+const modalDescription = document.getElementById("modal-description")
+const modalPrice = document.getElementById("modal-price")
+const modalTitle = document.getElementById("modal-title")
 
 
 
@@ -119,7 +126,7 @@ const displayTrees = (trees) => {
                     alt="${tree.name}" />
             </figure>
             <div class="card-body">
-                <h2 class="card-title text-left">${tree.name}</h2>
+                <h2 onclick="openTreeModal(${tree.id})" class="card-title hover:text-green-600 duration-300 ease cursor-pointer text-left">${tree.name}</h2>
                 <p class="text-left line-clamp-2">${tree.description}</p>
                 <div class="flex justify-between items-center mb-0.5">
                     <div class="badge bg-[#DCFCE7] text-[#15803D] rounded-full">${tree.category}</div>
@@ -136,6 +143,28 @@ const displayTrees = (trees) => {
 
     manageSpinner(false)
 };
+
+
+
+
+
+// Open modal and Load word details
+async function openTreeModal(ID) {
+    console.log("Clicked plants id is :", ID);
+
+    const res = await fetch(`https://openapi.programming-hero.com/api/plant/${ID}`)
+    const data = await res.json()
+    const plantDetails = data.plants;
+    // console.log(plantDetails);
+
+    modalTitle.textContent = plantDetails.name;
+    modalImage.src = plantDetails.image;
+    modalDescription.textContent = plantDetails.description;
+    modalPrice.textContent = plantDetails.price;
+    modalCategory.textContent = plantDetails.category;
+
+    treeDetailsModal.showModal()
+}
 
 
 

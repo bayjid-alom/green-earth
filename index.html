@@ -26,7 +26,8 @@
         <div class="main-div grid grid-cols-12 gap-8">
 
             <!-- Categories container (left side)-->
-            <div class="font-bold bg-white border-t border-t-green-500 border-t-3 card-body shadow rounded-md text-2xl col-span-3">
+            <div
+                class="font-bold bg-white border-t border-t-green-500 border-t-3 card-body shadow rounded-md text-2xl col-span-3 sticky">
                 <h2 class="font-bold text-2xl text-left m-2">Categories</h2>
 
                 <div class="space-y-3">
@@ -52,7 +53,7 @@
                 <!-- Loading Spinner -->
                 <div id="loading-spinner" class="h-[60vh] flex justify-center items-center hidden">
                     <span class="loading loading-dots loading-xl"></span>
-                </div> 
+                </div>
 
 
                 <!-- Trees will rendered -->
@@ -73,6 +74,73 @@
 
         </div>
     </main>
+
+
+
+
+
+
+
+
+
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="tree_details_modal.showModal()">open modal</button> -->
+
+
+
+    <dialog id="tree_details_modal" class="modal">
+        <div id="modal-box" class="modal-box max-w-lg p-6 rounded-2xl">
+
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-5">
+                <h2 id="modal-title" class="text-2xl font-bold">Arjun Tree</h2>
+
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost text-xl"
+                        onclick="document.getElementById('tree_details_modal').close()">✕</button>
+                </form>
+            </div>
+
+            <!-- Tree Image -->
+            <div class="rounded-xl overflow-hidden mb-5">
+                <img id="modal-image" src="https://i.ibb.co.com/MxSDCxV4/arjun-min.jpg" alt="Arjun Tree"
+                    class="w-full h-60 object-cover" />
+            </div>
+
+            <!-- Tree Information -->
+            <div class="space-y-2">
+                <div>
+                    <span class="font-bold ">Category : </span>
+                    <h3 id="modal-category" class="font-bold  badge badge-outline badge-success"></h3>
+                </div>
+
+                <div>
+                    <p id="modal-description" class="text-gray-500 leading-6">A sturdy tree with bark known for its
+                        heart-strengthening
+                        properties. Valued in herbal medicine for cardiovascular health.</p>
+                </div>
+
+                <div class="flex gap-1 items-center">
+                    <p id="modal-price" class="text-2xl font-bold text-green-600">700 </p>
+                    <span class="text-2xl font-bold text-green-600">TK</span>
+                </div>
+            </div>
+
+
+
+            <!-- Actions -->
+            <div class="modal-action mt-6">
+                <form method="dialog">
+                    <button class="btn btn-outline">Close</button>
+                </form>
+                <button class="btn btn-primary">Add to Cart</button>
+            </div>
+
+        </div>
+    </dialog>
+
+
 
 
 

@@ -1,20 +1,20 @@
 ## 🌱 Green Earth - `Working Flow`
 
 
-### 📌 1. Category Button দেখানো
+### 📌 01. Category Button দেখানো
 
 API থেকে category data **fetch** করে প্রতিটি category অনুযায়ী dynamic button তৈরি করে UI-তে দেখানো হয়েছে।
 
 
 <br>
 
-### 📌 2. Plant Card তৈরি করা
+### 📌 02. Plant Card তৈরি করা
 
 DaisyUI ব্যবহার করে প্রতিটি plant-এর জন্য dynamic card তৈরি করা হয়েছে। Card-এর description দুই লাইনের মধ্যে সীমাবদ্ধ রাখতে `line-clamp-2` class ব্যবহার করা হয়েছে। যেখানে `truncate` class ব্যবহার করলে description শুধু এক লাইনে সীমাবদ্ধ থাকে।
 
 <br>
 
-### 📌 3. সব Plant Dynamicভাবে দেখানো
+### 📌 03. সব Plant Dynamicভাবে দেখানো
 
 Plants API থেকে সব plant data **fetch** করে প্রতিটি plant-এর তথ্য অনুযায়ী dynamic card তৈরি করে UI-তে দেখানো হয়েছে।
 
@@ -180,8 +180,116 @@ allTreesBtn.addEventListener("click", () => {
 ```
 
 
-
 <br>
 
 
+
+
+
+
+### 📌 06. Show Modal()
+
+<details>
+<summary>Build the Tree Details Modal with AI</summary>
+
+```
+<dialog id="tree_details_modal" class="modal">
+    <div id="modal-box" class="modal-box max-w-lg p-6 rounded-2xl">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-5">
+            <h2 id="modal-title" class="text-2xl font-bold">Arjun Tree</h2>
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost text-xl"
+                    onclick="document.getElementById('tree_details_modal').close()">✕</button>
+            </form>
+        </div>
+
+        <!-- Tree Image -->
+        <div class="rounded-xl overflow-hidden mb-5">
+            <img id="modal-image" src="https://i.ibb.co.com/MxSDCxV4/arjun-min.jpg"
+                alt="Arjun Tree" class="w-full h-60 object-cover" />
+        </div>
+
+        <!-- Tree Information -->
+        <div class="space-y-2">
+            <div>
+                <span class="font-bold">Category : </span>
+                <h3 id="modal-category" class="font-bold badge badge-outline badge-success"></h3>
+            </div>
+            <div>
+                <p id="modal-description" class="text-gray-500 leading-6">A sturdy tree with bark known for its heart-strengthening properties. Valued in herbal medicine for cardiovascular health.</p>
+            </div>
+            <div class="flex gap-1 items-center">
+                <p id="modal-price" class="text-2xl font-bold text-green-600">700</p>
+                <span class="text-2xl font-bold text-green-600">TK</span>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="modal-action mt-6">
+            <form method="dialog">
+                <button class="btn btn-outline">Close</button>
+            </form>
+            <button class="btn btn-primary">Add to Cart</button>
+        </div>
+
+    </div>
+</dialog>
+
+```
+
+</details>
+
+
+
+- প্রথমে modal element-টি JavaScript-এ ধরে নিতে হবে:
+  `const treeDetailsModal = document.getElementById("tree_details_modal")`
+
+- এরপর `displayTrees()` function-এর নিচে `openTreeModal()` নামে একটি নতুন function তৈরি করতে হবে।
+
+- `openTreeModal()` কোথায় call হবে?
+  Card-এর **tree name/heading**-এ click করলে `openTreeModal()` function call হবে এবং সেই tree-এর `id` পাঠানো হবে।
+
+```js
+<h2 onclick="openTreeModal(${tree.id})" class="card-title cursor-pointer text-left">
+    ${tree.name}
+</h2>
+```
+
+
+> Find all required modal elements:
+
+```
+const modalImage = document.getElementById("modal-image")
+const modalCategory = document.getElementById("modal-category")
+const modalDescription = document.getElementById("modal-description")
+const modalPrice = document.getElementById("modal-price")
+const modalTitle = document.getElementById("modal-title")
+```
+
+
+> **এরপর `openTreeModal()` function-এর ভিতরে নিচের কাজগুলো করতে হবে:**
+
+```
+async function openTreeModal(ID) {
+    console.log("Clicked plants id is :", ID);
+
+    const res = await fetch(`https://openapi.programming-hero.com/api/plant/${ID}`)
+    const data = await res.json()
+    const plantDetails = data.plants;
+    // console.log(plantDetails);
+
+    modalTitle.textContent = plantDetails.name;
+    modalImage.src = plantDetails.image;
+    modalDescription.textContent = plantDetails.description;
+    modalPrice.textContent = plantDetails.price;
+    modalCategory.textContent = plantDetails.category;
+
+    treeDetailsModal.showModal()
+}
+```
+
+
+<br>
 

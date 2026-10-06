@@ -2,6 +2,8 @@ const categoriesContainer = document.getElementById("categoriesContainer");
 const treesContainer = document.getElementById("treesContainer");
 const categorySpinner = document.getElementById("category-spinner");
 
+const allTreesBtn = document.getElementById("all-trees");
+
 
 
 function manageSpinner(status) {
@@ -45,6 +47,7 @@ async function loadCategories() {
 async function selectCategory(categoryId, btn) {
     console.log(categoryId, btn);
     manageSpinner(false)
+
     const allButtons = document.querySelectorAll("#categoriesContainer button, #all-trees");
 
     allButtons.forEach(btn => {
@@ -54,7 +57,32 @@ async function selectCategory(categoryId, btn) {
 
     btn.classList.add("btn-primary")
     btn.classList.remove("btn-outline")
+
+    const res = await fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`);
+    const data = await res.json();
+
+    displayTrees(data.plants)
 }
+
+
+
+
+// All Trees Button
+
+allTreesBtn.addEventListener("click", () => {
+    // Update active button style
+    const allButtons = document.querySelectorAll("#categoriesContainer button, #all-trees");
+
+    allButtons.forEach(btn => {
+        btn.classList.remove("btn-primary")
+        btn.classList.add("btn-outline")
+    })
+
+    allTreesBtn.classList.add("btn-primary")
+    allTreesBtn.classList.remove("btn-outline")
+
+    loadTrees()
+})
 
 
 
@@ -67,12 +95,14 @@ const loadTrees = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/plants");
     const data = await res.json();
     displayTrees(data.plants);
+
+    manageSpinner(false)
 };
 
 
 
 
-const displayTrees = trees => {
+const displayTrees = (trees) => {
     treesContainer.innerHTML = "";
 
     trees.forEach(tree => {

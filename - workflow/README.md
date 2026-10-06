@@ -84,37 +84,31 @@ function hideSpinner(){
 
 
 
+### 05. Category অনুযায়ী Trees দেখানো
 
-### 05. প্রত্যেক বাটনের Trees দেখানো
+প্রতিটি category button-এ click করলে `selectCategory()` function call হয় এবং clicked button-এর `categoryId` ও button element পাওয়া যায়।
 
-```
-btn.onclick = () => selectCategory(category.id);
--
-async function selectCategory(id) {
-    console.log(id);
-}
-```
+```js
+btn.onclick = () => selectCategory(category.id, btn);
 
-
-```
 async function selectCategory(categoryId, btn) {
     console.log(categoryId, btn);
-    // manageSpinner(false)
-    btn.classList.add("btn-primary")
-
-    document.querySelectorAll("")
-
 }
 ```
 
+এরপর সব category button এবং **All Trees** button select করে প্রথমে সব button-কে inactive করা হয়। তারপর clicked button-টিকে active করা হয়।
+
+```js
+const allButtons = document.querySelectorAll("#categoriesContainer button, #all-trees");
+
+allButtons.forEach(btn => {
+    btn.classList.remove("btn-primary");
+    btn.classList.add("btn-outline");
+});
+
+btn.classList.add("btn-primary");
+btn.classList.remove("btn-outline");
 ```
-<button id="all-trees" class="btn btn-primary w-full">All Trees</button>
-```
 
-
-
-
-
-
-
-
+**Flow:**  
+`Click Category → Get Category ID → Reset All Buttons → Make Clicked Button Active`

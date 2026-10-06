@@ -1,5 +1,6 @@
 const categoriesContainer = document.getElementById("categoriesContainer");
 const treesContainer = document.getElementById("treesContainer");
+const categorySpinner = document.getElementById("category-spinner");
 
 
 
@@ -16,6 +17,9 @@ function manageSpinner(status) {
 
 
 async function loadCategories() {
+    categorySpinner.classList.remove("hidden");
+    categoriesContainer.classList.add("hidden")
+
     const res = await fetch("https://openapi.programming-hero.com/api/categories");
     const data = await res.json();
 
@@ -30,7 +34,12 @@ async function loadCategories() {
         btn.onclick = () => selectCategory(category.id, btn);
         categoriesContainer.appendChild(btn);
     });
+
+    categorySpinner.classList.add("hidden");
+    categoriesContainer.classList.remove("hidden")
 }
+
+
 
 
 async function selectCategory(categoryId, btn) {
@@ -45,7 +54,6 @@ async function selectCategory(categoryId, btn) {
 
     btn.classList.add("btn-primary")
     btn.classList.remove("btn-outline")
-
 }
 
 
@@ -69,7 +77,9 @@ const displayTrees = trees => {
 
     trees.forEach(tree => {
         const card = document.createElement("div");
-        card.className = "card bg-base-100 shadow-sm";
+        // card.className = "card bg-base-100 shadow-sm";
+
+        card.className = "card bg-base-100 shadow-sm border border-base-200 rounded-2xl overflow-hidden hover:-translate-y-1 hover:border-teal-500 hover:shadow-[0_8px_30px_rgba(20,184,166,0.15)] transition-all duration-300"
 
         card.innerHTML = `
             <figure>
@@ -81,12 +91,12 @@ const displayTrees = trees => {
             <div class="card-body">
                 <h2 class="card-title text-left">${tree.name}</h2>
                 <p class="text-left line-clamp-2">${tree.description}</p>
-                <div class="flex justify-between items-center">
-                    <div class="badge bg-[#DCFCE7] text-[#15803D]">${tree.category}</div>
+                <div class="flex justify-between items-center mb-0.5">
+                    <div class="badge bg-[#DCFCE7] text-[#15803D] rounded-full">${tree.category}</div>
                     <h2 class="font-bold">${tree.price} TK</h2>
                 </div>
                 <div class="card-actions justify-end">
-                    <button class="btn text-white bg-[#15803D] w-full rounded-full">Add to Cart</button>
+                    <button class="btn text-white bg-[#15803D] w-full rounded-md">Add to Cart</button>
                 </div>
             </div>
         `;

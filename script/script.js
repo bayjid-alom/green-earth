@@ -14,6 +14,7 @@ const modalTitle = document.getElementById("modal-title")
 let cart = [];
 const cartContainer = document.getElementById("cart-container")
 const totalPrice = document.getElementById("total-price")
+const emptyCartMessage = document.getElementById("emptyCartMessage")
 
 
 
@@ -197,6 +198,15 @@ function addToCart(id, name, price) {
 function updateCart() {
     cartContainer.innerHTML = "";
 
+    if (cart.length == 0) {
+        emptyCartMessage.classList.remove("hidden")
+        totalPrice.textContent = `${0} TK`
+        return
+    }
+    else {
+        emptyCartMessage.classList.add("hidden")
+    }
+
     let total = 0;
     cart.forEach(item => {
         total += item.price * item.quantity;
@@ -212,7 +222,7 @@ function updateCart() {
                 </div>
                 <button onclick="removeFromCart(${item.id})" class="btn btn-ghost btn-sm">✕</button>
             </div>
-            <p class="text-right text-xl font-bold text-green-600">TK ${item.price * item.quantity}</p>
+            <p class="text-right text-lg font-bold text-green-600">${item.price * item.quantity} TK</p>
         `;
 
         cartContainer.appendChild(cartItem);

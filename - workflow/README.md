@@ -1,4 +1,4 @@
-## 🌱 Green Earth - `Working Flow`
+## 🌱 Green Earth - `Project Working Flow`
 
 
 ### 📌 01. Category Button দেখানো
@@ -308,9 +308,11 @@ async function openTreeModal(ID) {
 
 এরপর Add to Cart button-এ `onclick` দিয়ে `addToCart()` function call করতে হবে এবং `id`, `name`, `price` পাঠাতে হবে:
 
+```
 <button onclick="addToCart(${tree.id}, '${tree.name}', '${tree.price}')" class="btn text-white bg-[#15803D] w-full rounded-md">
     <i class="fa-solid fa-cart-shopping"></i> Add to Cart
 </button>
+```
 
 Cart রাখার জন্য empty array তৈরি করতে হবে:
 let cart = [];
@@ -457,6 +459,52 @@ Total = 200 × 3 = 600 TK
 
 
 
+### 📌 11. Show Empty Message When Cart is Empty
 
-### 📌 10. Total Price Update (Right/Bottom Part)
+```html
+<div id="emptyCartMessage" class="text-center py-10 px-4 rounded-xl border border-base-200 bg-base-100">
+    <p class="text-3xl text-gray-300">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </p>
+    <p class="font-semibold text-gray-700">Your cart is empty!</p>
+    <p class="text-sm text-gray-500 mt-1">Add trees to get started.</p>
+</div>
+```
 
+**ধরে নিয়ে আসবো →**
+
+```js
+const emptyCartMessage = document.getElementById("emptyCartMessage");
+```
+
+**এরপর `updateCart()` function-এর ভিতরে যা যা করতে হবে →**
+
+```js
+function updateCart() {
+    cartContainer.innerHTML = "";
+
+    if (cart.length == 0) {
+        emptyCartMessage.classList.remove("hidden");
+        totalPrice.textContent = `${0} TK`;
+        return;
+    }
+    else {
+        emptyCartMessage.classList.add("hidden");
+    }
+}
+```
+
+
+
+<br>
+
+
+
+
+
+
+## 👨‍💻 Author
+
+**Bayjid Alom**
+
+> Progress is built through consistency, one line of code at a time.

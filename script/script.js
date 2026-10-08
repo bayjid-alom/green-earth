@@ -13,6 +13,7 @@ const modalTitle = document.getElementById("modal-title")
 
 let cart = [];
 const cartContainer = document.getElementById("cart-container")
+const totalPrice = document.getElementById("total-price")
 
 
 
@@ -196,7 +197,10 @@ function addToCart(id, name, price) {
 function updateCart() {
     cartContainer.innerHTML = "";
 
+    let total = 0;
     cart.forEach(item => {
+        total += item.price * item.quantity;
+
         const cartItem = document.createElement("div");
         cartItem.className = "card card-body shadow-md";
 
@@ -213,6 +217,10 @@ function updateCart() {
 
         cartContainer.appendChild(cartItem);
     });
+
+    totalPrice.innerText = `${total} TK.`;
+
+
 }
 
 

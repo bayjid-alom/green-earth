@@ -418,15 +418,45 @@ Total = 200 × 3 = 600 TK
 
 
 
-
 ### 📌 10. Total Price Update (Right/Bottom Part)
 
+- `updateCart()` function-এর ভিতরে `let total = 0;` দিয়ে total price শুরু করা হয়।
+- `forEach()` loop-এর ভিতরে প্রতিটি item-এর price × quantity করে total-এর সাথে যোগ করা হয়।
+- Loop শেষ হওয়ার পর `totalPrice` element-এ final total দেখানো হয়।
+
+`total-price` element select:
+
+    const totalPrice = document.getElementById("total-price")
+
+`updateCart()` এর ভিতরে:
+
+    function updateCart() {
+        cartContainer.innerHTML = "";
+
+        let total = 0;
+
+        cart.forEach(item => {
+            total += item.price * item.quantity;
+        });
+
+        totalPrice.innerText = `${total} TK.`;
+    }
+
+**Example:**
+- Mango Tree → 200 TK × 2 = 400 TK
+- Neem Tree → 150 TK × 1 = 150 TK
+- **Total = 550 TK.**
+
+এভাবে cart-এর item quantity পরিবর্তন হলে total price-ও automatically update হবে।
+
+
+
+
+<br>
 
 
 
 
 
-
-
-
+### 📌 10. Total Price Update (Right/Bottom Part)
 

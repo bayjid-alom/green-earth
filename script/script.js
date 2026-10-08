@@ -135,7 +135,7 @@ const displayTrees = (trees) => {
                 <p class="text-left line-clamp-2">${tree.description}</p>
                 <div class="flex justify-between items-center mb-0.5">
                     <div class="badge bg-[#DCFCE7] text-[#15803D] rounded-full">${tree.category}</div>
-                    <h2 class="font-bold">${tree.price} TK</h2>
+                    <h2 class="font-bold ${tree.price > 500 ? "text-red-500" : "text-green-500"}">${tree.price} TK</h2>
                 </div>
                 <div class="card-actions justify-end">
 

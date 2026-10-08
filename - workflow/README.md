@@ -499,6 +499,53 @@ function updateCart() {
 <br>
 
 
+<details>
+<summary>📌 Conditional Tailwind Classes</summary>
+
+### 📌 Conditional Class
+
+Condition অনুযায়ী dynamically Tailwind class add/remove করা যায়।
+
+**Single class:**
+```js
+<h2 class="${tree.price > 500 ? "text-red-500" : ""}">
+    ${tree.price} TK
+</h2>
+```
+
+**Multiple classes:**
+```js
+<h2 class="${tree.price > 500 ? "border-t-4 border-red-500" : ""}">
+    ${tree.price} TK
+</h2>
+```
+
+**Both conditions-এ different classes:**
+```js
+<h2 class="${tree.price > 500 ? "text-red-500" : "text-green-500"}">
+    ${tree.price} TK
+</h2>
+```
+
+**Multiple conditions:**
+```js
+<h2 class="${
+    tree.price > 1000 ? "text-red-500" :
+    tree.price > 500 ? "text-orange-500" :
+    "text-green-500"
+}">
+    ${tree.price} TK
+</h2>
+```
+
+> `?` → true হলে class, `:` → false হলে class। Multiple class দিতে হলে একই string-এর মধ্যে space ব্যবহার করতে হয়।
+
+</details>
+
+
+<br>
+
+
 
 
 

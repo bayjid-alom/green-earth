@@ -293,3 +293,140 @@ async function openTreeModal(ID) {
 
 <br>
 
+
+
+
+
+
+
+
+### 📌 07. Cart Card & Quantity Update
+
+প্রথমে HTML-এ cart container তৈরি করতে হবে:
+
+<div id="cart-container"></div>
+
+এরপর Add to Cart button-এ `onclick` দিয়ে `addToCart()` function call করতে হবে এবং `id`, `name`, `price` পাঠাতে হবে:
+
+<button onclick="addToCart(${tree.id}, '${tree.name}', '${tree.price}')" class="btn text-white bg-[#15803D] w-full rounded-md">
+    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+</button>
+
+Cart রাখার জন্য empty array তৈরি করতে হবে:
+let cart = [];
+
+`addToCart()` function-এর মাধ্যমে item cart-এ add হবে। একই item আবার add করলে নতুন card তৈরি না হয়ে `quantity` update হবে।
+
+```
+function addToCart(id, name, price) {
+    const existingItem = cart.find(item => item.id == id);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({
+            id,
+            name,
+            price,
+            quantity: 1
+        });
+    }
+
+    updateCart();
+}
+
+```
+
+> Cart display করার জন্য `updateCart()` function তৈরি করতে হবে:
+
+const cartContainer = document.getElementById("cart-container");
+
+```
+function updateCart() {
+    cartContainer.innerHTML = "";
+
+    cart.forEach(item => {
+        const cartItem = document.createElement("div");
+        cartItem.className = "card card-body shadow-md";
+
+        cartItem.innerHTML = `
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="font-semibold">${item.name}</h2>
+                    <p class="text-sm text-gray-500">TK ${item.price} × ${item.quantity}</p>
+                </div>
+                <button onclick="removeFromCart(${item.id})" class="btn btn-ghost btn-sm">✕</button>
+            </div>
+            <p class="text-right text-xl font-bold text-green-600">TK ${item.price * item.quantity}</p>
+        `;
+
+        cartContainer.appendChild(cartItem);
+    });
+}
+
+```
+
+
+
+<br>
+
+
+
+
+### 📌 08. Remove card Item from Cart
+
+Cart-এর `✕` button-এ item-এর `id` পাঠিয়ে `removeFromCart()` function call করতে হবে:
+
+<button onclick="removeFromCart(${item.id})" class="btn btn-ghost btn-sm">✕</button>
+
+এরপর `filter()` ব্যবহার করে নির্দিষ্ট item cart থেকে remove করতে হবে:
+
+```
+function removeFromCart(treeId) {
+    let updatedCartElements = cart.filter(item => item.id != treeId);
+    cart = updatedCartElements;
+    updateCart();
+}
+```
+
+
+
+<br>
+
+
+
+
+
+### 📌 09. Price Update
+
+`updateCart()` function-এর ভিতরে প্রতিটি item-এর `price × quantity` করে total price calculate করতে হবে।
+
+`${item.price * item.quantity}`
+
+**Example:**
+
+Price = 200 TK  
+Quantity = 3  
+Total = 200 × 3 = 600 TK
+
+> 💡 একই item আবার **Add to Cart** করলে `quantity` বাড়বে এবং সেই অনুযায়ী **total price automatically update** হবে।
+
+<br>
+
+
+
+
+
+
+
+### 📌 10. Total Price Update (Right/Bottom Part)
+
+
+
+
+
+
+
+
+
+

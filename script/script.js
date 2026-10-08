@@ -11,6 +11,9 @@ const modalDescription = document.getElementById("modal-description")
 const modalPrice = document.getElementById("modal-price")
 const modalTitle = document.getElementById("modal-title")
 
+let cart = [];
+const cartContainer = document.getElementById("cart-container")
+
 
 
 function manageSpinner(status) {
@@ -126,14 +129,15 @@ const displayTrees = (trees) => {
                     alt="${tree.name}" />
             </figure>
             <div class="card-body">
-                <h2 onclick="openTreeModal(${tree.id})" class="card-title hover:text-green-600 duration-300 ease cursor-pointer text-left">${tree.name}</h2>
+                <h2 onclick="openTreeModal(${tree.id})" class="card-title hover:text-green-600 duration-300 ease font-semibold cursor-pointer text-left">${tree.name}</h2>
                 <p class="text-left line-clamp-2">${tree.description}</p>
                 <div class="flex justify-between items-center mb-0.5">
                     <div class="badge bg-[#DCFCE7] text-[#15803D] rounded-full">${tree.category}</div>
                     <h2 class="font-bold">${tree.price} TK</h2>
                 </div>
                 <div class="card-actions justify-end">
-                    <button class="btn text-white bg-[#15803D] w-full rounded-md">Add to Cart</button>
+
+                    <button onclick="addToCart(${tree.id}, '${tree.name}', '${tree.price}')" class="btn text-white bg-[#15803D] w-full rounded-md"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                 </div>
             </div>
         `;
@@ -165,6 +169,65 @@ async function openTreeModal(ID) {
 
     treeDetailsModal.showModal()
 }
+
+
+
+function addToCart(id, name, price) {
+    console.log(id, name, price, "Added to cart.");
+
+    const existingItem = cart.find(item => item.id == id)
+    if (existingItem) {
+        existingItem.quantity++;
+    }
+    else {
+        cart.push({
+            id,
+            name,
+            price,
+            quantity: 1,
+        })
+    }
+
+    updateCart()
+}
+
+
+
+function updateCart() {
+    cartContainer.innerHTML = "";
+
+    cart.forEach(item => {
+        const cartItem = document.createElement("div");
+        cartItem.className = "card card-body shadow-md";
+
+        cartItem.innerHTML = `
+            <div class="flex justify-between ">
+                <div class="text-left">
+                    <h2 class="font-bold">${item.name}</h2>
+                    <p class="text-sm text-gray-500 mt-1">TK ${item.price} × ${item.quantity}</p>
+                </div>
+                <button onclick="removeFromCart(${item.id})" class="btn btn-ghost btn-sm">✕</button>
+            </div>
+            <p class="text-right text-xl font-bold text-green-600">TK ${item.price * item.quantity}</p>
+        `;
+
+        cartContainer.appendChild(cartItem);
+    });
+}
+
+
+
+function removeFromCart(treeId) {
+    // must be declare by let
+    let updatedCartElements = cart.filter((item) => item.id != treeId);
+    cart = updatedCartElements;
+    updateCart()
+}
+
+
+
+
+
 
 
 

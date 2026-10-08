@@ -11,6 +11,12 @@
 
     <link rel="stylesheet" href="./styles/styles.css">
 
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
     <title>Green Earth</title>
 
 
@@ -69,8 +75,31 @@
 
             <!-- cart (right side) -->
             <div class="bg-white col-span-3 rounded-md shadow-sm">
-                <h2 class="my-10">Cart here....</h2>
+                <h2 class="mb-2 mt-1 m-2 text-left font-semibold text-xl "><i class="fa-solid fa-cart-shopping"></i>
+                    Cart
+                </h2>
+
+
+
+                <!-- cart-container -->
+                <div id="cart-container" class="m-1 space-y-4">
+
+                    <!-- Small cart cards will show here by dynamically... -->
+
+                    
+                    <!-- Total amount -->
+                    <div id="" class="flex justify-between font-bold items-center bg-green-50 rounded-lg p-4 my-3">
+                        <span>Total :</span>
+                        <span class="total-price">$0</span>
+                    </div>
+
+
+                </div>
+
+
             </div>
+
+
 
         </div>
     </main>
@@ -84,7 +113,7 @@
 
 
 
-    <!-- Open the modal using ID.showModal() method -->
+    <!-- Product details modal -->
     <!-- <button class="btn" onclick="tree_details_modal.showModal()">open modal</button> -->
 
 
@@ -134,7 +163,12 @@
                 <form method="dialog">
                     <button class="btn btn-outline">Close</button>
                 </form>
-                <button class="btn btn-primary">Add to Cart</button>
+
+
+                <!-- Cart -->
+                <div>
+                    <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+                </div>
             </div>
 
         </div>
